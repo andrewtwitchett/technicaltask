@@ -1,0 +1,15 @@
+{
+  "name": "Third Bridge Recruitment Task",
+  "type": "Console tool",
+  "require": {
+    "php": ">=5.5.9",
+    "symfony/yaml": ">=3.3"
+  },
+  "autoload": {
+      "psr-4": {
+       "Task\\": "src/Task/",
+        "Data\\": "src/Data/",
+        "Helper\\": "src/Helper/"
+      }
+  }
+}
