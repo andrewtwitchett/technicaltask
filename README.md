@@ -1,3 +1,30 @@
+# Using the tool
+
+## Installation
+
+To use first run composer install. This will insert the required packages in the vendor directory
+
+## Run
+
+To run goto the directory in cmd and run with either 1 or 2 parameters.
+
+Ways to run: 
+
+- Via input and output parameters (if output is set it will go into that directory)
+
+```
+$ php RunTask.php --input="data/file.csv" --output="results/result.txt
+```
+
+- Via only an input parameter (note that this option does not include --input)
+
+```
+$ php RunTask.php data/file.csv
+```
+
+## Testing
+TBD
+
 # Recruitment task
 
 The aim is to create a command line tool which reads data from a file, performs simple operation on this data and stores or prints a result. Input files could have different format (csv, yml, xml), but they contain the same data. The result could be stored in a plain text file or printed on stdout. Please see the input files (located in `data` directory) to check the data structure.

@@ -3,28 +3,8 @@
 require __DIR__.'/vendor/autoload.php';
 
 use Task\Runner\Task;
-use Helper\InputHelper;
 
+$task = new Task();
 
-$inputHelper = new InputHelper();
-
-$params = $inputHelper->getInputData($argv);
-
-if ($params['error']) {
-    print $params['errorMessage'];
-} else {
-
-    $input = $params["input"];
-    $output = $params["output"];
-
-    $task = new Task();
-
-    print $task->runTask($input, $output);
-}
-
-
-
-
-
-
+print $task->runTask($argv);
 

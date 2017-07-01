@@ -11,6 +11,7 @@ class FileHelper
         $outputValue = $this->getValueCountFromData($data);
 
         if ($fileLocation) {
+            //add in create dir if required.
             file_put_contents($fileLocation, $outputValue);
         }
 

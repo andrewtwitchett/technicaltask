@@ -12,35 +12,52 @@ use Symfony\Component\Yaml\Yaml;
 use Data\XmlParser;
 use Data\CsvParser;
 use Helper\FileHelper;
+use Helper\InputHelper;
 
 class Task
 {
-        public function runTask($input, $output) {
+        public function runTask($argv) {
 
-            $outputValue = 0;
+            $returnValue = "";
+            $inputHelper = new InputHelper();
 
-            if (file_exists($input)) {
+            $params = $inputHelper->getInputData($argv);
 
-                $data = "";
-                $info = new \SplFileInfo($input);
-                $fileHelper = new FileHelper();
+            if ($params['error']) {
+                $returnValue = $params['errorMessage'];
+            } else {
 
-                switch ($info->getExtension()) {
-                    case "xml" :
-                        $xmlParser = new XmlParser($input);
-                        $data = $xmlParser->getXMLasAssocArray();
-                        break;
-                    case "yml" :
-                         $data = Yaml::parse(file_get_contents($input));
-                        break;
-                    case "csv" :
-                        $csvParser = new CsvParser($input);
-                        $data = $csvParser->getCSVasAssocArray();
-                        break;
+                $input = $params["input"];
+                $output = $params["output"];
+
+                if (file_exists($input)) {
+
+                    $data = "";
+                    $info = new \SplFileInfo($input);
+                    $fileHelper = new FileHelper();
+
+                    switch ($info->getExtension()) {
+                        case "xml" :
+                            $xmlParser = new XmlParser($input);
+                            $data = $xmlParser->getXMLasAssocArray();
+                            break;
+                        case "yml" :
+                            $data = Yaml::parse(file_get_contents($input));
+                            break;
+                        case "csv" :
+                            $csvParser = new CsvParser($input);
+                            $data = $csvParser->getCSVasAssocArray();
+                            break;
+                    }
+
+                    $returnValue = $fileHelper->outputDataToFile($data, $output);
+                } else {
+                    $returnValue = "input file not found";
                 }
+
             }
 
-            return $fileHelper->outputDataToFile($data, $output);
+            return $returnValue;
 
         }
 
