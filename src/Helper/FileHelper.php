@@ -5,6 +5,11 @@ namespace Helper;
 
 class FileHelper
 {
+    /**
+     * @param $data
+     * @param string $fileLocation
+     * @return int
+     */
     public function outputDataToFile($data, $fileLocation = "")
     {
         $outputValue = $this->getValueCountFromData($data);
@@ -17,6 +22,10 @@ class FileHelper
         return $outputValue;
     }
 
+    /**
+     * @param $data
+     * @return int
+     */
     public function getValueCountFromData($data)
     {
         $returnValue = 0;

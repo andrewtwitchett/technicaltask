@@ -8,6 +8,10 @@ class XmlParser implements ParserInterface
     private $usersData;
     private $dataLoaded = false;
 
+    /**
+     * XmlParser constructor.
+     * @param $input
+     */
     public function __construct($input)
     {
         $file = file_get_contents($input);
@@ -15,16 +19,25 @@ class XmlParser implements ParserInterface
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function getDataLoaded()
     {
         return $this->dataLoaded;
     }
 
+    /**
+     * @return mixed
+     */
     public function getUsers()
     {
         return $this->usersData;
     }
 
+    /**
+     * @param $inputXml
+     */
     private function loadXMLfromString($inputXml)
     {
         //load the xml

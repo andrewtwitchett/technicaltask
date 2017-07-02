@@ -8,6 +8,12 @@ class User
     private $active;
     private $value;
 
+    /**
+     * User constructor.
+     * @param $name
+     * @param $active
+     * @param $value
+     */
     public function __construct($name, $active, $value)
     {
         $this->name = $name;
@@ -23,11 +29,17 @@ class User
         }
     }
 
+    /**
+     * @return bool
+     */
     public function getActive()
     {
         return $this->active;
     }
 
+    /**
+     * @return int
+     */
     public function getValue()
     {
         return $this->value;

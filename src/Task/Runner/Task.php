@@ -16,6 +16,10 @@ use Helper\InputHelper;
 
 class Task
 {
+    /**
+     * @param $argv
+     * @return int|string
+     */
     public function runTask($argv)
     {
         $returnValue = "";
@@ -24,8 +28,7 @@ class Task
             //Get the input data and parse
             $inputHelper->setInputData($argv);
 
-            // ensure there is no error. Else return error message (this could throw an exception but as we are
-            // only outputting to the console it makes sense to just output a message for now )
+            // ensure there is no error. Else return error message (this could throw an exception in a future release )
             if ($inputHelper->getError()) {
                 $returnValue = $inputHelper->getErrorMessage();
             } else {
@@ -53,7 +56,7 @@ class Task
                             break;
                     }
 
-                    //if the data is loaded get the users.
+                    //if the data is loaded get the users and output data to a file.
                     if ($parser->getDataLoaded()) {
                         $data = $parser->getUsers();
                         $returnValue = $fileHelper->outputDataToFile($data, $output);

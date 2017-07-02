@@ -54,15 +54,11 @@ The Behat tests are very basic but will test the end to end of one journey with 
 
 ## What i could improve
 
-Refactor error handling to provide exception handling and logging. 
+- Refactor error handling to provide exception handling and logging. 
 - Refactor Task.php, the code is untidy and could be managed better in separate functions. 
+- Better use of the interface so that in task php it can handle any file type. 
 - Improve the unit test. More tests are required - Test all data and helper classes fully
-- Add more behat test, rather than just testing only user journey I need to test all the user journeys
-
-
-
-
-
+- Add more behat tests, rather than just testing only user journey I need to test all the user journeys
 
 
 # Recruitment task

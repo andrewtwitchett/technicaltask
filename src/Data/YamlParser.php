@@ -9,6 +9,10 @@ class YamlParser implements ParserInterface
     private $usersData;
     private $dataLoaded = false;
 
+    /**
+     * YamlParser constructor.
+     * @param $input
+     */
     public function __construct($input)
     {
         $dataLoaded = false;
@@ -26,11 +30,17 @@ class YamlParser implements ParserInterface
         $this->dataLoaded = $dataLoaded;
     }
 
+    /**
+     * @return bool
+     */
     public function getDataLoaded()
     {
         return $this->dataLoaded;
     }
 
+    /**
+     * @return mixed
+     */
     public function getUsers()
     {
         return $this->usersData;

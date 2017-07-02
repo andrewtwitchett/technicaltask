@@ -9,6 +9,9 @@ class InputHelper
     private $error;
     private $errorMessage;
 
+    /**
+     * InputHelper constructor.
+     */
     public function __construct()
     {
         //default object
@@ -18,32 +21,49 @@ class InputHelper
         $this->errorMessage = "";
     }
 
+    /**
+     * @return string
+     */
     public function getInput()
     {
         return $this->input;
     }
 
+    /**
+     * @return string
+     */
     public function getOutput()
     {
         return $this->output;
     }
 
+    /**
+     * @return bool
+     */
     public function getError()
     {
         return $this->error;
     }
 
+    /**
+     * @return string
+     */
     public function getErrorMessage()
     {
         return $this->errorMessage;
     }
 
+    /**
+     * @param $argv
+     */
     public function setInputData($argv)
     {
         $this->setInputParameters($argv);
     }
 
-
+    /**
+     * @param $argv
+     */
     private function setInputParameters($argv)
     {
 
@@ -59,6 +79,10 @@ class InputHelper
         }
     }
 
+    /**
+     * @param $argv
+     * @return int
+     */
     private function checkCountOfParams($argv)
     {
         if (count($argv) !== 2 && count($argv) !== 3) {
@@ -69,6 +93,9 @@ class InputHelper
         return count($argv);
     }
 
+    /**
+     *
+     */
     private function setOptionValue()
     {
         $inputOptions = getopt("", array("input:","output::"));

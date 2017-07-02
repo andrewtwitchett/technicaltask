@@ -8,6 +8,10 @@ class CsvParser implements ParserInterface
     private $usersData;
     private $dataLoaded = false;
 
+    /**
+     * CsvParser constructor.
+     * @param $input
+     */
     public function __construct($input)
     {
         $dataLoaded = false;
@@ -33,11 +37,17 @@ class CsvParser implements ParserInterface
         $this->dataLoaded = $dataLoaded;
     }
 
+    /**
+     * @return bool
+     */
     public function getDataLoaded()
     {
         return $this->dataLoaded;
     }
 
+    /**
+     * @return mixed
+     */
     public function getUsers()
     {
         return $this->usersData;
