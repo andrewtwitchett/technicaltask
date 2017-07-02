@@ -10,7 +10,7 @@ To run goto the directory in cmd and run with either 1 or 2 parameters.
 
 Ways to run: 
 
-- Via input and output parameters (if output is set it will go into that directory)
+- Via input and output parameters (if output is set the result will go in a file in that directory)
 
 ```
 $ php RunTask.php --input="data/file.csv" --output="results/result.txt
@@ -55,6 +55,7 @@ The Behat tests are very basic but will test the end to end of one journey with 
 ## What i could improve
 
 - Refactor error handling to provide exception handling and logging. 
+- Refactor file handling to ensure directory exists and better error handling. 
 - Refactor Task.php, the code is untidy and could be managed better in separate functions. 
 - Better use of the interface so that in task php it can handle any file type. 
 - Improve the unit test. More tests are required - Test all data and helper classes fully
