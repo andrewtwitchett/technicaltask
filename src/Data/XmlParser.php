@@ -3,9 +3,10 @@
 
 namespace Data;
 
-class XmlParser
+class XmlParser implements ParserInterface
 {
-    private $xml;
+    private $usersData;
+    private $dataLoaded = false;
 
     public function __construct($input)
     {
@@ -14,22 +15,28 @@ class XmlParser
         return true;
     }
 
-
-    public function getXMLasAssocArray($tidyUser = true)
+    public function getDataLoaded()
     {
-        $json = json_encode($this->xml);
-        $data = json_decode($json, true);
-        if ($tidyUser) {
-            $data['users'] = $data['user']; //This give each item the same name!
-            unset($data['user']); //Not nice!
-        }
+        return $this->dataLoaded;
+    }
 
-        return $data;
+    public function getUsers()
+    {
+        return $this->usersData;
     }
 
     private function loadXMLfromString($inputXml)
     {
         //load the xml
-        $this->xml = simplexml_load_string($inputXml);
+        $xml = simplexml_load_string($inputXml);
+        $json = json_encode($xml);
+        $xmlArray = json_decode($json, true);
+
+        foreach ($xmlArray['user'] as $user) {
+            $user = new User($user['name'], $user['active'], $user['value']);
+            $this->usersData[] = $user;
+        }
+
+        $this->dataLoaded = true;
     }
 }

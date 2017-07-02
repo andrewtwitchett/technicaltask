@@ -21,14 +21,11 @@ class FileHelper
     {
         $returnValue = 0;
 
-        foreach ($data['users'] as $item) {
-            if (array_key_exists("active", $item) && ($item['active'] === "true" ||  $item['active'] === true)) {
-                if (array_key_exists("value", $item)) {
-                    $returnValue = $returnValue + $item['value'];
-                }
+        foreach ($data as $user) {
+            if ($user->getActive() === true) {
+                $returnValue = $returnValue + $user->getValue();
             }
         }
-
         return $returnValue;
     }
 }

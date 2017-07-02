@@ -1,9 +1,10 @@
 <?php
 
-
 namespace Data;
 
-class CsvParser implements ParserInterface
+use Symfony\Component\Yaml\Yaml;
+
+class YamlParser implements ParserInterface
 {
     private $usersData;
     private $dataLoaded = false;
@@ -13,15 +14,7 @@ class CsvParser implements ParserInterface
         $dataLoaded = false;
 
         if ($input) {
-            $data = ['users'];
-            $combined = [];
-            $rows = array_map('str_getcsv', file($input));
-            $header = array_shift($rows);
-            $csv = array();
-            foreach ($rows as $row) {
-                $combined[] = array_combine($header, $row);
-            }
-            $data['users'] = $combined;
+            $data = Yaml::parse(file_get_contents($input));
 
             foreach ($data['users'] as $user) {
                 $user = new User($user['name'], $user['active'], $user['value']);

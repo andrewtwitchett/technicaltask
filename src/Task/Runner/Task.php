@@ -8,9 +8,9 @@
 
 namespace Task\Runner;
 
-use Symfony\Component\Yaml\Yaml;
 use Data\XmlParser;
 use Data\CsvParser;
+use Data\YamlParser;
 use Helper\FileHelper;
 use Helper\InputHelper;
 
@@ -39,22 +39,27 @@ class Task
                     $info = new \SplFileInfo($input);
                     $fileHelper = new FileHelper();
 
+                    $parser = "";
                     //Decide what to do with the data that has come in
                     switch ($info->getExtension()) {
                         case "xml":
-                            $xmlParser = new XmlParser($input);
-                            $data = $xmlParser->getXMLasAssocArray();
+                            $parser = new XmlParser($input);
                             break;
                         case "yml":
-                            $data = Yaml::parse(file_get_contents($input));
+                            $parser = new YamlParser($input);
                             break;
                         case "csv":
-                            $csvParser = new CsvParser($input);
-                            $data = $csvParser->getCSVasAssocArray();
+                            $parser = new CsvParser($input);
                             break;
                     }
 
-                    $returnValue = $fileHelper->outputDataToFile($data, $output);
+                    //if the data is loaded get the users.
+                    if ($parser->getDataLoaded()) {
+                        $data = $parser->getUsers();
+                        $returnValue = $fileHelper->outputDataToFile($data, $output);
+                    } else {
+                        $returnValue = "Unable to load data";
+                    }
                 } else {
                     $returnValue = "input file not found";
                 }

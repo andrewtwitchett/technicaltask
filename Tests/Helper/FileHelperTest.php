@@ -4,12 +4,13 @@ namespace Test\Helper;
 
 use PHPUnit\Framework\TestCase;
 use Helper\FileHelper;
+use Data\User;
 
 class FileHelperTest extends TestCase
 {
     public function testSumValuesCorrect()
     {
-        $users = [
+        $usersArray = [
              "users" => [
                 [
                     "name" => "John",
@@ -34,6 +35,11 @@ class FileHelperTest extends TestCase
              ]
          ];
 
+        foreach ($usersArray['users'] as $user) {
+            $user = new User($user['name'], $user['active'], $user['value']);
+            $users[] = $user;
+        }
+
         $fileHelper = new FileHelper();
 
         $this->assertEquals($fileHelper->getValueCountFromData($users),900);
@@ -41,7 +47,7 @@ class FileHelperTest extends TestCase
 
     public function testSumValuesCorrectNoActive()
     {
-        $users = [
+        $usersArray = [
             "users" => [
                 [
                     "name" => "John",
@@ -65,6 +71,12 @@ class FileHelperTest extends TestCase
                 ]
             ]
         ];
+
+
+        foreach ($usersArray['users'] as $user) {
+            $user = new User($user['name'], $user['active'], $user['value']);
+            $users[] = $user;
+        }
 
         $fileHelper = new FileHelper();
 
@@ -73,7 +85,7 @@ class FileHelperTest extends TestCase
 
     public function testSumValuesCorrectRemoveActive()
     {
-        $users = [
+        $usersArray = [
             "users" => [
                 [
                     "name" => "John",
@@ -94,6 +106,11 @@ class FileHelperTest extends TestCase
             ]
         ];
 
+        foreach ($usersArray['users'] as $user) {
+            $user = new User($user['name'], "", $user['value']);
+            $users[] = $user;
+        }
+
         $fileHelper = new FileHelper();
 
         $this->assertEquals($fileHelper->getValueCountFromData($users),0);
@@ -101,7 +118,7 @@ class FileHelperTest extends TestCase
 
     public function testSumValuesCorrectNoValue()
     {
-        $users = [
+        $usersArray = [
             "users" => [
                 [
                     "name" => "John",
@@ -122,6 +139,11 @@ class FileHelperTest extends TestCase
             ]
         ];
 
+        foreach ($usersArray['users'] as $user) {
+            $user = new User($user['name'], $user['active'], "");
+            $users[] = $user;
+        }
+
         $fileHelper = new FileHelper();
 
         $this->assertEquals($fileHelper->getValueCountFromData($users),0);
@@ -129,7 +151,7 @@ class FileHelperTest extends TestCase
 
     public function testOutputDataNoFile()
     {
-        $users = [
+        $usersArray = [
             "users" => [
                 [
                     "name" => "John",
@@ -153,6 +175,11 @@ class FileHelperTest extends TestCase
                 ]
             ]
         ];
+
+        foreach ($usersArray['users'] as $user) {
+            $user = new User($user['name'], $user['active'], $user['value']);
+            $users[] = $user;
+        }
 
         $fileHelper = new FileHelper();
 
@@ -161,7 +188,7 @@ class FileHelperTest extends TestCase
 
     public function testOutputDataWithFile()
     {
-        $users = [
+        $usersArray = [
             "users" => [
                 [
                     "name" => "John",
@@ -185,6 +212,11 @@ class FileHelperTest extends TestCase
                 ]
             ]
         ];
+
+        foreach ($usersArray['users'] as $user) {
+            $user = new User($user['name'], $user['active'], $user['value']);
+            $users[] = $user;
+        }
 
         $fileHelper = new FileHelper();
 
