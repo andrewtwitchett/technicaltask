@@ -3,10 +3,9 @@
 
 namespace Helper;
 
-
 class FileHelper
 {
-    public function outputDataToFile($data, $fileLocation)
+    public function outputDataToFile($data, $fileLocation = "")
     {
         $outputValue = $this->getValueCountFromData($data);
 
@@ -18,20 +17,18 @@ class FileHelper
         return $outputValue;
     }
 
-    private function getValueCountFromData($data) {
-
+    public function getValueCountFromData($data)
+    {
         $returnValue = 0;
 
         foreach ($data['users'] as $item) {
-
-            if ($item['active'] === "true" || $item['active'] === true) {
-                $returnValue = $returnValue + $item['value'];
+            if (array_key_exists("active", $item) && ($item['active'] === "true" ||  $item['active'] === true)) {
+                if (array_key_exists("value", $item)) {
+                    $returnValue = $returnValue + $item['value'];
+                }
             }
         }
 
         return $returnValue;
-
-
     }
-
 }

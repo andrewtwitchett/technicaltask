@@ -5,7 +5,6 @@ namespace Data;
 
 class XmlParser
 {
-
     private $xml;
 
     public function __construct($input)
@@ -16,8 +15,8 @@ class XmlParser
     }
 
 
-    public function getXMLasAssocArray($tidyUser = true) {
-
+    public function getXMLasAssocArray($tidyUser = true)
+    {
         $json = json_encode($this->xml);
         $data = json_decode($json, true);
         if ($tidyUser) {
@@ -28,20 +27,9 @@ class XmlParser
         return $data;
     }
 
-    private function loadXMLfromString($inputXml){
+    private function loadXMLfromString($inputXml)
+    {
         //load the xml
         $this->xml = simplexml_load_string($inputXml);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

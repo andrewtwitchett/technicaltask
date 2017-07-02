@@ -5,30 +5,39 @@ namespace Data;
 
 class CsvParser
 {
-
     private $csv;
+    private $dataLoaded = false;
 
     public function __construct($input)
     {
-        $data = ['users'];
-        $combined = [];
-        $rows = array_map('str_getcsv', file($input));
-        $header = array_shift($rows);
-        $csv = array();
-        foreach ($rows as $row) {
-            $combined[] = array_combine($header, $row);
+        $dataLoaded = false;
+
+        if ($input) {
+            $data = ['users'];
+            $combined = [];
+            $rows = array_map('str_getcsv', file($input));
+            $header = array_shift($rows);
+            $csv = array();
+            foreach ($rows as $row) {
+                $combined[] = array_combine($header, $row);
+            }
+            $data['users'] = $combined;
+
+            $this->csv = $data;
+            $dataLoaded = true;
         }
-        $data['users'] = $combined;
 
-        $this->csv = $data;
+        $this->dataLoaded = $dataLoaded;
+    }
 
-        return true;
+    public function getDataLoaded()
+    {
+        return $this->dataLoaded;
     }
 
 
-    public function getCSVasAssocArray() {
-
+    public function getCSVasAssocArray()
+    {
         return $this->csv;
     }
-
 }

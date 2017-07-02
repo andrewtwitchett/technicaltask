@@ -22,8 +22,50 @@ $ php RunTask.php --input="data/file.csv" --output="results/result.txt
 $ php RunTask.php data/file.csv
 ```
 
+## PSR 2 
+
+I have included http://cs.sensiolabs.org/ php coding standards fixer in composer under require dev. 
+
+In windows to run you just need to go to vendor bin and run 
+
+
+```
+$ php-cs-fixer.bat fix ../../src --rules=@PSR2
+```
+
 ## Testing
-TBD
+
+There are two types of testing in this application unit (phpUnit) and fucntional (behat)
+
+To run the unit tests:
+
+```
+$ phpunit Tests
+```
+
+To Run the behat tests:
+
+```
+$ vendor\bin\behat
+```
+
+The Behat tests are very basic but will test the end to end of one journey with a CSV file. 
+
+
+## What i could improve
+
+- Turn the data from an array to an object (this could then be saved to an orm such as doctrine)
+- Refactor error handling to provide exception handling and logging. 
+- Refactor Task.php, the code is untidy and could be managed better in separate functions. 
+- Add an interface to the parser so they always return the same data and allow additional types to be added easier. 
+- Improve the unit test. More tests are required - Test all dta and helper classes fully
+- Add more behat test, rather than just testing only user journey I need to test all the user journeys
+
+
+
+
+
+
 
 # Recruitment task
 

@@ -2,14 +2,24 @@
   "name": "Third Bridge Recruitment Task",
   "type": "Console tool",
   "require": {
-    "php": ">=5.5.9",
+    "php": ">=5.6.0",
     "symfony/yaml": ">=3.3"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.3",
+    "phpunit/phpunit": "5.7",
+    "behat/behat": "^3.3"
   },
   "autoload": {
       "psr-4": {
-       "Task\\": "src/Task/",
+        "Task\\": "src/Task/",
         "Data\\": "src/Data/",
         "Helper\\": "src/Helper/"
       }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
   }
 }

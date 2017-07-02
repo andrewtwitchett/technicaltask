@@ -16,35 +16,39 @@ use Helper\InputHelper;
 
 class Task
 {
-        public function runTask($argv) {
+    public function runTask($argv)
+    {
+        $returnValue = "";
+        $inputHelper = new InputHelper();
 
-            $returnValue = "";
-            $inputHelper = new InputHelper();
+            //Get the input data and parse
+            $inputHelper->setInputData($argv);
 
-            $params = $inputHelper->getInputData($argv);
-
-            if ($params['error']) {
-                $returnValue = $params['errorMessage'];
+            // ensure there is no error. Else return error message (this could throw an exception but as we are
+            // only outputting to the console it makes sense to just output a message for now )
+            if ($inputHelper->getError()) {
+                $returnValue = $inputHelper->getErrorMessage();
             } else {
-
-                $input = $params["input"];
-                $output = $params["output"];
+                $input = $inputHelper->getInput();
+                $output = $inputHelper->getOutput();
 
                 if (file_exists($input)) {
 
-                    $data = "";
+                    // data is currently just an array but it could be an object.
+                    $data = [];
                     $info = new \SplFileInfo($input);
                     $fileHelper = new FileHelper();
 
+                    //Decide what to do with the data that has come in
                     switch ($info->getExtension()) {
-                        case "xml" :
+                        case "xml":
                             $xmlParser = new XmlParser($input);
                             $data = $xmlParser->getXMLasAssocArray();
                             break;
-                        case "yml" :
+                        case "yml":
                             $data = Yaml::parse(file_get_contents($input));
                             break;
-                        case "csv" :
+                        case "csv":
                             $csvParser = new CsvParser($input);
                             $data = $csvParser->getCSVasAssocArray();
                             break;
@@ -54,17 +58,8 @@ class Task
                 } else {
                     $returnValue = "input file not found";
                 }
-
             }
 
-            return $returnValue;
-
-        }
-
-
-
-
-
-
-
+        return $returnValue;
+    }
 }
